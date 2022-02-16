@@ -34,11 +34,11 @@ end
 
 % systematic way of finding better threshold for segment fg & bg
 i = 1
-d=10000
+d=10000;
 mean_last = mean(m(:)) 
 
 % before threshold
-new_im = abs(m)
+new_im = abs(m);
 im2 = cat(3, im2, new_im/mean_last);
 show_image(new_im, [file_prefix , '0-0']);
 

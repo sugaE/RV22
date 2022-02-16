@@ -70,12 +70,12 @@ end
 % 
 % *Denoising:*
 
-gaussian5 = conv_gaussian(5, 1.4);
+gaussian5 = conv_gaussian(5, 1.4)
 % round(gaussian5 * 159)
 shakey_smooth = conv2(shakey, gaussian5, "same");
 im_g5 = task1(shakey_smooth, sobelX, sobelY, 0, 50, 'gaussian5-');
 
-im_diff5 = im_sol(:,:,1:5) - im_g5;
+im_diff5 = im_sol(:,:,1:4) - im_g5;
 show_images(im_diff5)
 show_image(im_diff5(:,:,3), ['g5-diff-mean']);
 %%
@@ -87,9 +87,10 @@ shakey_smooth = conv2(shakey, gaussian3, "same");
 
 im_g3 = task1(shakey_smooth, sobelX, sobelY, 0, 50, 'gaussian3-');
 
-im_diff3 = im_sol(:,:,1:4) - im_g3;
+im_diff3 = im_sol(:,:,1:5) - im_g3;
 show_images(im_diff3)
 show_image(im_diff3(:,:,3), ['g3-diff-mean']);
+
 %% 
 % *Other filters:*
 % 
@@ -106,6 +107,8 @@ im_lap = task1(shakey_smooth, laplacian, laplacian, -1, 0, 'laplacian-');
 show_image(abs(im_lap) >20, 'diff_lap')
 %%
 
-img3 = task2(shakey_smooth, laplacian_gaussian, 60) 
+img3 = task1(shakey_smooth, laplacian_gaussian, 0, -1, 0, 'lapgaussian-')
+%%
+show_image(abs(img3)==0)
 %% 
 %
