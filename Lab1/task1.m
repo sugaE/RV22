@@ -40,19 +40,19 @@ mean_last = mean(m(:))
 % before threshold
 new_im = abs(m);
 im2 = cat(3, im2, new_im/mean_last);
-show_image(new_im, [file_prefix , '0-0']);
+show_image(new_im, file_prefix + "0_0");
 
 if ~~thr_d
 
     % to compare
     new_im = abs(m) > mean_last/2; 
     im2 = cat(3, im2, new_im);
-    show_image(new_im, [file_prefix , '0-', num2str(mean_last/2)]);
+    show_image(new_im, file_prefix + "0_"+ num2str(mean_last/2));
     
     while d > thr_d & i < 10
         new_im = abs(m) > mean_last; 
         im2 = cat(3, im2, new_im); 
-        show_image(new_im, [file_prefix , num2str(i),'-', num2str(mean_last)]);
+        show_image(new_im, [file_prefix , num2str(i),"_", num2str(mean_last)]);
         i = i + 1
         mean_fg = mean2(m(new_im));
         mean_bg = mean2(m(~new_im));
@@ -63,7 +63,7 @@ if ~~thr_d
     
     new_im = abs(m) > mean_last; 
     im2 = cat(3, im2, new_im);
-    show_image(new_im, [file_prefix , num2str(i),'-', num2str(mean_last)]);
+    show_image(new_im, [file_prefix , num2str(i),"_", num2str(mean_last)]);
 
 end
 

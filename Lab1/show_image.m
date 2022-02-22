@@ -9,8 +9,8 @@ axis image;  % use ratio same as original img
 axis off;  % for export
 
 % export image as png file
-if file_name
-    exportgraphics(fig, fullfile("images/",[file_name,'.png']), BackgroundColor="none", Resolution=600);
+if size(file_name)
+    exportgraphics(fig, fullfile("images/"+file_name+".png"), BackgroundColor="none", Resolution=600);
 end
 
 end
