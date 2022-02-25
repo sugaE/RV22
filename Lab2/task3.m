@@ -2,6 +2,7 @@ function edge_log7_2 = task3(img, sigma, size)
 
 k = round((size - 1) / 2);
 log7_2=laplacian_of_gaussian_n(sigma, -k:1:k);
+% conv2(laplacian, gaussian_filter_5x5) % should do this to calc log
 surf(log7_2);
 colormap("default");
 
