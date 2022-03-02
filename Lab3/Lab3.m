@@ -15,6 +15,9 @@ BW = edge(I,'canny');
 
 % Calculate the Hough Transform
 [H,T,R] = hough(BW);
+% R range from -1279 to 1279, which is diagonal length of BW
+% T range from -89 to 90, radius
+% H is matrix of (1279*2) x (90*2)
 
 % Show original image and the calculated edges
 figure;
