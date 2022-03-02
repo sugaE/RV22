@@ -8,11 +8,8 @@
 *.sty
 *.html
 *images/
-*figures/
 
 # Specific
 w1.mlx
 IMG_7048.jpg
 *.asv
-
-

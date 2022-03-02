@@ -1,7 +1,7 @@
 
 <link type="text/css" rel="stylesheet" href="https://github.com/sugaE/sugaE.github.io/blob/master/uob/md.css">
 
-# Robot Vision - Lab 4 - Hough Transformation
+# Robot Vision - Lab 4 - Registration
 > Yanrong~Wang, 2257486, Robot Vision[06-25024], 2022. [Code is here](https://github.com/sugaE/RV22/tree/main/Lab4).
 
 <!-- ## STEP 1:
@@ -19,8 +19,8 @@ The more *correct* paired points, the more accurate the transform gets. Also if 
 |6| 0.083026 s |
 
 
-![](images/cfp3.png)
-![](images/cfp6.png)
+![](figures/cfp3.png)
+![](figures/cfp6.png)
 
 ## Question 2:
 How would you evaluate the accuracy of your registration?
@@ -30,17 +30,20 @@ Other than Affine, what are the other options and which one do you think works b
 
 (Some options has minimal points requirement.)
 
-![](images/cfp6affine.png =49%x)
-![](images/cfp6lwm.png =49%x)
+<img src="figures/cfp6affine.png" width="49%" />
+<img src="figures/cfp6lwm.png" width="49%" />
 *affine / lwm(6)*
 
-![](images/cfp6nonreflectivesimilarity.png =49%x)
-![](images/cfp6polynomial.png =49%x)
+<img src="figures/cfp6nonreflectivesimilarity.png" width="49%" />
+<img src="figures/cfp6polynomial.png" width="49%" />
 *nonreflectivesimilarity / polynomial(2)*
 
-![](images/cfp6projective.png =49%x)
-![](images/cfp6pwl.png =49%x)
+<img src="figures/cfp6projective.png" width="49%" />
+<img src="figures/cfp6pwl.png" width="49%" />
 *projective / pwl*
+
+TODO
+use Q2 to determine which is best.
 
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">
