@@ -25,9 +25,9 @@ for i = 1:imm
     end
 end
 
-% verifying if the result is correct with internal conv2 restult
-verifying = (conv2(im, kernel, 'same') - new_im);
-verifying_loss = sum(abs(verifying(:))) / prod(size(verifying))
+%% verifying if the result is correct with internal conv2 restult
+% verifying = (conv2(im, kernel, 'same') - new_im);
+% verifying_loss = sum(abs(verifying(:))) / prod(size(verifying))
 
 end
 

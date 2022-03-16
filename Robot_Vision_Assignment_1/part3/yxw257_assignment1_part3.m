@@ -2,15 +2,13 @@ clear all;
 close all;
 %% *Part 3*
 
-checkerboardP = imread("checkerboardPhoto.png"); 
-figure; checkerboardP = imagesc(checkerboardP);
-checkerboardP = checkerboardP.CData();
-axis image; colormap("gray");
+checkerboardP = imread("checkerboardPhoto.png");  
+checkerboardP = show_image(checkerboardP, "q3.0_checker");
 
-circleP = imread("circlePhoto.png"); 
-figure; circleP = imagesc(circleP); 
-circleP = circleP.CData();
-axis image; colormap("gray"); 
+circleP = imread("circlePhoto.png");  
+circleP = show_image(circleP, "q3.0_circle");
+
+names = ["Gaussian", "Box", "Median"];
 %% 
 % *Question 3.1*	
 % 
@@ -84,18 +82,13 @@ show_image(circle_med ,'q3.3_circle_med');
 
 % loading image
 malards_park_3 = imread("Malards_in_Golden_Gate_Park.jpg");
-figure; malards_p = imagesc(rgb2gray(malards_park_3)); axis image; colormap("gray");
-malards_p = malards_p.CData();
-%%
-% add noises
-figure;
-malards_sp = imnoise(malards_p, 'salt & pepper', 0.075); 
-% show_image(malards_sp ,'q3.4_malards_sp');
+malards_p = rgb2gray(malards_park_3); 
 
-malards_g = imnoise(malards_p, 'gaussian', 0.1, 0.15);  
-% show_image(malards_g ,'q3.4_malards_g');
+% add noises
+malards_sp = imnoise(malards_p, 'salt & pepper', 0.075);  
+malards_g = imnoise(malards_p, 'gaussian', 0.1, 0.15);   
 %%
-% n = 3;
+
 for n=[3, 7, 11]
     g_n = gaussian_mn([n,n], n/2);
     b_n = box_blur(n);
@@ -107,18 +100,26 @@ for n=[3, 7, 11]
     malards_g_g15 = convolve(malards_g, g_n); 
     malards_g_b15 = convolve(malards_g, b_n); 
     malards_g_med = simpleMedian(malards_g, n, n); 
-    
+%     malards_g_mean = mean_filter(malards_g, n, n); 
+
+% %     testing results
+%     t_g = cat(3, malards_g_g15, malards_g_b15, malards_g_med);
+%     for i = 1:size(t_g, 3)
+%         diff = double(malards_p) - t_g(:,:,i);
+%         show_image(diff, "q3.4_diff_g_" + names(i));
+%         fprintf('diff %s: %d / pixel\n', names(i), sum(abs(diff(:)))/prod(size(diff)) );
+%     end
+ 
     fig4 = figure;  
     subplot(2, 4, 1); imshow(malards_sp); title("S&P corrupted")
-    subplot(2, 4, 2); imagesc(malards_sp_g15); axis image; axis off; title("Gaussian on S&P, "+num2str(n))
-    subplot(2, 4, 3); imagesc(malards_sp_b15); axis image; axis off; title("Box on S&P, "+num2str(n))
-    subplot(2, 4, 4); imagesc(malards_sp_med); axis image; axis off; title("Median on S&P, "+num2str(n))
+    subplot(2, 4, 2); show_image(malards_sp_g15, "", fig4); title("Gaussian on S&P, "+num2str(n))
+    subplot(2, 4, 3); show_image(malards_sp_b15, "", fig4); title("Box on S&P, "+num2str(n))
+    subplot(2, 4, 4); show_image(malards_sp_med, "", fig4); title("Median on S&P, "+num2str(n))
     subplot(2, 4, 5); imshow(malards_g); title("Gaussian corrupted")
-    subplot(2, 4, 6); imagesc(malards_g_g15); axis image; axis off; title("Gaussian on Gaussian, "+num2str(n))
-    subplot(2, 4, 7); imagesc(malards_g_b15); axis image; axis off; title("Box on Gaussian, "+num2str(n))
-    subplot(2, 4, 8); imagesc(malards_g_med); axis image; axis off; title("Median on Gaussian, "+num2str(n))
-    colormap("gray");
-    exportgraphics(fig4, fullfile("images/q3.4_g"+n+".png"), BackgroundColor="none", Resolution=600);
+    subplot(2, 4, 6); show_image(malards_g_g15, "", fig4); title("Gaussian on G, "+num2str(n))
+    subplot(2, 4, 7); show_image(malards_g_b15, "", fig4); title("Box on G, "+num2str(n))
+    subplot(2, 4, 8); show_image(malards_g_med, "", fig4); title("Median on G, "+num2str(n))
+    exportgraphics(fig4, fullfile("images/q3.4_test"+n+".png"), BackgroundColor="none", Resolution=600);
 end
 
 

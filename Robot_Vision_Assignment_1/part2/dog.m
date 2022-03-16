@@ -1,7 +1,7 @@
-function re = dog(size, mu1, sigma1, mu2, sigma2)
+function re = dog(sizef, mu1, sigma1, mu2, sigma2)
 
 arguments
-    size (1,2) int32 
+    sizef (1, 2) int8
     mu1 double = 0.0
     sigma1 double = 1.0
     mu2 double = mu1
@@ -12,8 +12,8 @@ arguments
 end
 
 
-g1 = gaussian_mn(size, sigma1, mu1);
-g2 = gaussian_mn(size, sigma2, mu2);
+g1 = gaussian_mn(sizef, sigma1, mu1);
+g2 = gaussian_mn(sizef, sigma2, mu2);
 
 re = g1 - g2;
 % re = re/sum(re(:))

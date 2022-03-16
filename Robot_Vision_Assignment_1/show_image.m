@@ -9,10 +9,10 @@ end
 % if ~fig
 %     fprintf("creating new figure handle")
 %     fig = figure; % creates a new Figure window; return handler
-colormap(gray); 
 t = imagesc(im);
 re = t.CData;
 
+colormap("gray"); 
 axis image;  % use ratio same as original img
 axis off;  % for export
 
