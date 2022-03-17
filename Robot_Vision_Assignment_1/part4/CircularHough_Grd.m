@@ -399,12 +399,12 @@ prm_aoiminsize = floor(min([ min(size(accum)) * 0.25, ...
     prm_r_range(2) * 1.5 ]));
 
 % -- Filter for searching for local maxima
-prm_fltrLM_s = 1.35;
+prm_fltrLM_s = 1.6;
 prm_fltrLM_r = ceil( prm_fltrLM_R * 0.6 );
 prm_fltrLM_npix = max([ 6, ceil((prm_fltrLM_R/2)^1.8) ]);
 
 % -- Lower bound of the intensity of local maxima
-prm_LM_LoBndRa = 0.2;  % minimum ratio of LM to the max of 'accum'
+prm_LM_LoBndRa = 0.5;  % minimum ratio of LM to the max of 'accum'
 
 % Smooth the accumulation array
 fltr4accum = fltr4accum / sum(fltr4accum(:));
@@ -442,6 +442,8 @@ else
     % Whole accumulation array as the one AOI
     accumAOI = [1, size(accum,1), 1, size(accum,2)];
 end
+ 
+varargout{5} = accumAOI;
 
 % Thresholding of 'accum' by a lower bound
 prm_LM_LoBnd = max(accum(:)) * prm_LM_LoBndRa;
@@ -529,10 +531,11 @@ end
 
 % **** Debug code (begin)
 if dbg_on,
-    figure(dbg_bfigno); imagesc(dbg_LMmask); axis image;
+    fig = figure; imagesc(dbg_LMmask); axis image; %(dbg_bfigno);
     title('Generated map of local maxima');
+%     exportgraphics(fig, fullfile("images/"+ now+".png"), BackgroundColor="none", Resolution=600);
     if size(accumAOI, 1) == 1,
-        figure(dbg_bfigno+1);
+        figure;%(dbg_bfigno+1);
         surf(candLM, 'EdgeColor', 'none'); axis ij;
         title('Accumulation array after local maximum filtering');
     end

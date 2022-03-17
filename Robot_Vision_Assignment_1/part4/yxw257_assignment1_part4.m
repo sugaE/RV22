@@ -1,29 +1,17 @@
-clear all;
-close all;
+clear all;close all;clc; 
 %% *Part 4*
 
-figure;
 
-dice1 = imread("dice1.jpg");
-% dice1 = rgb2gray(dice1);
-% subplot(1, 4, 1);
-% imshow(dice1)
+dice1 = imread("dice1.jpg"); 
 
-dice2 = imread("dice2.jpg");
-% dice2 = rgb2gray(dice2);
-% subplot(1, 4, 2);
-% imshow(dice2)
+dice2 = imread("dice2.jpg"); 
 
-dice3 = imread("dice3.jpg");
-% dice3 = rgb2gray(dice3);
-% subplot(1, 4, 3);
-% imshow(dice3)
+dice3 = imread("dice3.jpg"); 
 
+dice4 = imread("dice4.jpg"); 
 
-dice4 = imread("dice4.jpg");
-% dice4 = rgb2gray(dice4);
-% subplot(1, 4, 4);
-% imshow(dice4)
+imgs = {dice1, dice2, dice3, dice4};
+names = ["dice1", "dice2", "dice3", "dice4"];
 
 %% 
 % *Question 4.1*	
@@ -36,61 +24,38 @@ dice4 = imread("dice4.jpg");
 % Hint: Use hold on and plot functions to display the detected circles on the 
 % image. 
 
-% imglist = [dice1, dice2, dice3, dice4];
-% g5 = dog([5,5]); % or can use gaussian_mn() from part2 
-% rawimg = filter2(g5 , dice1);
-% figure; imagesc(rawimg);axis image;
-% 
-% g5 = kgauss(1, 5); % or can use gaussian_mn() from part2 
-% rawimg = filter2(g5 , dice4);
-% figure; imagesc(rawimg);axis image;
 
+counts = zeros(size(names));
+debugging = 0;
 
-count_dice_dots(dice1)
-count_dice_dots(dice2)
-count_dice_dots(dice3)
-count_dice_dots(dice4)
-%%
-im = dice1
-im = rgb2gray(im);
+for i=1:size(imgs, 2)
+    figure
+    im_c = imgs{i}; 
+    rawimg = rgb2gray(im_c);  
+%     laplacian of gaussian. Apply before Hough to get clean edges
+    lap_g = [
+        0 1 1 2 2 2 1 1 0;
+        1 2 4 5 5 5 4 2 1;
+        1 4 5 3 0 3 5 4 1;
+        2 5 3 -12 -24 -12 3 5 2;
+        2 5 0 -24 -40 -24 0 5 2;
+        2 5 3 -12 -24 -12 3 5 2;
+        1 4 5 3 0 3 4 4 1;
+        1 2 4 5 5 5 4 2 1;
+        0 1 1 2 2 2 1 1 0]; 
+     
+    gfimg = imfilter(rawimg, lap_g); 
+    if debugging
+        show_image(gfimg,"q4.1_log_"+names(i));
+        [accum, circen, cirrad,dbg_LMmask,aois] = CircularHough_Grd(gfimg, [11 14], 25, 12, 1);
+        draw_cir_ho(im_c,accum,circen,cirrad, names(i),aois,debugging);
+    else
+        [accum, circen, cirrad] = CircularHough_Grd(gfimg, [11 14], 25, 12, 1); 
+        draw_cir_ho(im_c,accum,circen,cirrad, names(i));
+    end
+    counts(i) = size(circen, 1);
+    fprintf("%s counts %d.\n",  names(i), counts(i));
+end
 
-g5 = dog([9,9]);
-% rawimg = conv2(im_gray, g5)
-% rawimg = edge(im, "sobel") .* 1.0
-rawimg = conv2(im, kgauss(1))
-figure; imagesc(rawimg); axis image; 
-[accum, circen, cirrad] = CircularHough_Grd(rawimg, [10, 15], 0, 15, 1)
-draw_cir_ho(im, accum, circen, cirrad)
-%%
-im = dice2;
-im = rgb2gray(im);
- 
-% rawimg = conv2(im_gray, g5)
-rawimg = edge(im, "log") .* 1.0
-rawimg = conv2(rawimg, kgauss(1));
-figure; imagesc(rawimg); axis image; 
-[accum, circen, cirrad] = CircularHough_Grd(rawimg, [10, 15], 0.08, 19, 1)
-draw_cir_ho(im, accum, circen, cirrad)
-%%
-im = dice3;
-im = rgb2gray(im);
- 
-% rawimg = conv2(im_gray, g5)
-rawimg = edge(im, "log") .* 1.0
-rawimg = conv2(rawimg, kgauss(1));
-figure; imagesc(rawimg); axis image; 
-[accum, circen, cirrad] = CircularHough_Grd(rawimg, [10, 15], 0.12, 19, 1)
-draw_cir_ho(im, accum, circen, cirrad)
-%%
-im = dice4;
-im = rgb2gray(im);
- 
-g5 = dog([9,9]);
-% rawimg = conv2(im_gray, g5)
-rawimg = edge(im, "log") .* 1.0
-rawimg = conv2(rawimg, kgauss(0.9));
-figure; imagesc(rawimg); axis image; 
-[accum, circen, cirrad] = CircularHough_Grd(rawimg, [10, 15], 0.14, 22, 1)
-draw_cir_ho(im, accum, circen, cirrad)
 %% 
 %
