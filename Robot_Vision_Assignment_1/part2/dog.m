@@ -1,7 +1,7 @@
 function re = dog(sizef, mu1, sigma1, mu2, sigma2)
 
 arguments
-    sizef (1, 2) int8
+    sizef (1, 2) double
     mu1 double = 0.0
     sigma1 double = 1.0
     mu2 double = mu1

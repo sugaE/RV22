@@ -1,9 +1,10 @@
-function n_3x3 = gaussian_mn(mn, std, mu)
+function n_3x3 = gaussian_mn(mn, std, mu, show_surf)
 
 arguments
     mn (1,2) double
     std double = 1.0
     mu double = 0.0
+    show_surf logical = 0
 end
 
 m = mn(1);
@@ -19,9 +20,11 @@ n_3x3 = n_3x3 / sum(n_3x3(:));
 % end
 
 % display graph
-figure;
-colormap("default");
-surf(n_3x3);
+if show_surf
+    figure;
+    colormap("default");
+    surf(n_3x3);
+end
 
 end
 

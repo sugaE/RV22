@@ -2,15 +2,18 @@ clear all;
 close all;
 %% *Part 2*
 
+
 blue_marble_3 = imread("Blue_Marble.jpg");
-% blue_marble = imagesc(blue_marble_3)
 blue_marble = rgb2gray(blue_marble_3);
-figure;
-imshow(blue_marble);
+
 chicago_downtown_3 = imread("Chicago_Downtown_Aerial_View.jpg");
 chicago_downtown = rgb2gray(chicago_downtown_3);
+
 malards_park_3 = imread("Malards_in_Golden_Gate_Park.jpg");
 malards_park = rgb2gray(malards_park_3);
+
+% ks = ["blue_marble", "chicago_downtown", "malards_park"];
+% vs = {blue_marble, chicago_downtown, malards_park};
 %% 
 % *Question 2.1*	
 % 
@@ -26,22 +29,18 @@ malards_park = rgb2gray(malards_park_3);
 
 g3 = dog([3,3], 0, 1.6, 0, 5);
 g3_re = conv2(blue_marble, g3);
-show_image(g3_re);
+show_image(g3_re, "q2.1_g3_blue_marble");
 
-% A difference of Gaussians of any scale is an approximation to the laplacian of the Gaussian
-% However, Marr and Hildreth recommend the ratio of 1.6 
-% because of design considerations balancing bandwidth and sensitivity.
 g15 = dog([15,15]);
-% for i in [blue_marble, chicago_downtown, malards_park]:
-g15_bm = conv2(blue_marble, g15);
-show_image(g15_bm);
+
+g15_bm = conv2(blue_marble, g15); 
+show_image(g15_bm, "q2.1_g15_blue_marble");
 
 g15_cd = conv2(chicago_downtown, g15);
-show_image(g15_cd);
+show_image(g15_cd, "q2.1_g15_chicago_downtown");
 
 g15_mp = conv2(malards_park, g15);
-show_image(g15_mp);
-% end
+show_image(g15_mp, "q2.1_g15_malards_park");
 %% 
 % *Question 2.2*
 % 
@@ -50,9 +49,10 @@ show_image(g15_mp);
 % Apply your function to the accompanying three images (see above) and show the 
 % different scales produced by your function. 
 
-dogwithscale(blue_marble, [7,7], 0, 1, [1, 3, 5]);
-dogwithscale(chicago_downtown, [7,7], 0, 1, [1, 3, 5]);
-dogwithscale(malards_park, [7,7], 0, 1, [1, 3, 5]);
+size_of_g = 3:2:19;
+dog_bm=dogwithscale(blue_marble, size_of_g, 0, 0.8, "q2.2_bm");
+dog_cd=dogwithscale(chicago_downtown, size_of_g, 0, 0.8, "q2.2_cd");
+dog_mp=dogwithscale(malards_park, size_of_g, 0, 0.8, "q2.2_mp");
 %% 
 % *Question 2.3*
 % 
@@ -64,16 +64,31 @@ dogwithscale(malards_park, [7,7], 0, 1, [1, 3, 5]);
 % images (see above) and show your results by overlaying the feature positions 
 % and sizes on the original images. 
 
-%
+[aois_bm, aoin_bm] = scale_feature(dog_bm, 10, [9, 200]);
+aoin_bm
+show_image(blue_marble_3, "q2.3_bm");
+draw_aoi(aois_bm);
+
+
+[aois_cd, aoin_cd] = scale_feature(dog_cd, 19, [11, 200]);
+aoin_cd
+show_image(chicago_downtown_3, "q2.3_cd");
+draw_aoi(aois_cd);
+
+[aois_mp, aoin_mp] = scale_feature(dog_mp, 15, [15, 200]);
+aoin_mp
+show_image(malards_park_3, "q2.3_mp");
+draw_aoi(aois_mp);
 %% 
 % *Question 2.4*
 % 
 % Implement a function to examine the image neighbourhood of a feature and estimate 
 % the orientation of the feature. The scale of the feature should be taken into 
-% ac- count when estimating the orientation. Apply your function to the accompanying 
+% account when estimating the orientation. Apply your function to the accompanying 
 % three images (see above) and show your results by overlaying the feature positions, 
 % sizes, and orientations on the original images. 
 
 %
+
 %% 
 %
