@@ -28,6 +28,7 @@ malards_park = rgb2gray(malards_park_3);
 % and show your results. 
 
 g3 = dog([3,3], 0, 1.6, 0, 5);
+
 g3_re = conv2(blue_marble, g3);
 show_image(g3_re, "q2.1_g3_blue_marble");
 

@@ -18,11 +18,8 @@ for k = 1 : size(accumAOIsss, 1),
     aoi = accumAOIsss(k,:);    % just for referencing convenience
     rectangle('Position',[aoi(3), aoi(1), aoi(4)- aoi(3) , aoi(2)- aoi(1) ], EdgeColor="red")
 end
-for k = 1 : size(accumAOI, 1),
-    aoi = accumAOI(k,:);    % just for referencing convenience
-    rectangle('Position',[aoi(3), aoi(1), aoi(4)- aoi(3) , aoi(2)- aoi(1) ], EdgeColor="green")
-end
 hold off;
+draw_aoi(accumAOI);
 
 title('Accumulation Array from Circular Hough Transform');
 fig = figure; 
@@ -42,11 +39,8 @@ for k = 1 : size(accumAOIsss, 1),
     aoi = accumAOIsss(k,:);    % just for referencing convenience
     rectangle('Position',[aoi(3), aoi(1), aoi(4)- aoi(3) , aoi(2)- aoi(1) ], EdgeColor="red")
 end
-for k = 1 : size(accumAOI, 1),
-    aoi = accumAOI(k,:);    % just for referencing convenience
-    rectangle('Position',[aoi(3), aoi(1), aoi(4)- aoi(3) , aoi(2)- aoi(1) ], EdgeColor="green")
-end
 hold off;
+draw_aoi(accumAOI);
 
 % export image as png file
 if strlength(file_name)
