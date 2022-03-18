@@ -36,7 +36,7 @@ draw_aoi(accumAOI);
 % export image as png file
 if strlength(file_name)
     title(file_name+", counts "+num2str(dots_count));
-    exportgraphics(fig, fullfile("images/"+file_name+".png"), BackgroundColor="none", Resolution=600);
+%     exportgraphics(fig, fullfile("images/"+file_name+".png"), BackgroundColor="none", Resolution=600);
 end
 
 % figure; surf(accum, 'EdgeColor', 'none'); axis ij;

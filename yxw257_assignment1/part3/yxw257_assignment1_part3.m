@@ -123,7 +123,7 @@ for n=[3, 7, 11]
     subplot(2, 4, 6); show_image(malards_g_g15, "", fig4); title("Gaussian on G, "+num2str(n))
     subplot(2, 4, 7); show_image(malards_g_b15, "", fig4); title("Box on G, "+num2str(n))
     subplot(2, 4, 8); show_image(malards_g_med, "", fig4); title("Median on G, "+num2str(n))
-    exportgraphics(fig4, fullfile("images/q3.4_test"+n+".png"), BackgroundColor="none", Resolution=600);
+%     exportgraphics(fig4, fullfile("images/q3.4_test"+n+".png"), BackgroundColor="none", Resolution=600);
 end
 
 

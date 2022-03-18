@@ -76,7 +76,7 @@ aoin_bm
 fig1 = figure;
 show_image(blue_marble_3, "",fig1); 
 draw_aoi(aois_bm);
-exportgraphics(fig1, fullfile("images/q2.3_bm.png"), BackgroundColor="none", Resolution=600);
+% exportgraphics(fig1, fullfile("images/q2.3_bm.png"), BackgroundColor="none", Resolution=600);
 
 % chicago_downtown
 [aois_cd, aoin_cd] = scale_feature(dog_cd, 450,"q2.3_cd_grad");
@@ -84,7 +84,7 @@ aoin_cd
 fig2 = figure;
 show_image(chicago_downtown_3, "",fig2); 
 draw_aoi(aois_cd);
-exportgraphics(fig2, fullfile("images/q2.3_cd.png"), BackgroundColor="none", Resolution=600);
+% exportgraphics(fig2, fullfile("images/q2.3_cd.png"), BackgroundColor="none", Resolution=600);
 
 % malards_park
 [aois_mp, aoin_mp] = scale_feature(dog_mp, 350,"q2.3_mp_grad");
@@ -92,7 +92,7 @@ aoin_mp
 fig3 = figure;
 show_image(malards_park_3, "",fig3); 
 draw_aoi(aois_mp);
-exportgraphics(fig3, fullfile("images/q2.3_mp.png"), BackgroundColor="none", Resolution=600);
+% exportgraphics(fig3, fullfile("images/q2.3_mp.png"), BackgroundColor="none", Resolution=600);
 %% 
 % *Question 2.4*
 % 
@@ -108,21 +108,21 @@ exportgraphics(fig3, fullfile("images/q2.3_mp.png"), BackgroundColor="none", Res
 fig1 = figure;
 show_image(blue_marble_3,"" ,fig1); 
 draw_ori(rxy_bm, aois_bm);
-exportgraphics(fig1, fullfile("images/q2.4_bm.png"), BackgroundColor="none", Resolution=600);
+% exportgraphics(fig1, fullfile("images/q2.4_bm.png"), BackgroundColor="none", Resolution=600);
 
 %
 [rxy_cd,aois_cd] = rotate_feature(dog_cd, 450,"q2.4_cd_grad");
 fig1 = figure;
 show_image(chicago_downtown_3,"" ,fig1); 
 draw_ori(rxy_cd, aois_cd);
-exportgraphics(fig1, fullfile("images/q2.4_cd.png"), BackgroundColor="none", Resolution=600);
+% exportgraphics(fig1, fullfile("images/q2.4_cd.png"), BackgroundColor="none", Resolution=600);
 
 %
 [rxy_mp,aois_mp] = rotate_feature(dog_mp, 350,"q2.4_mp_grad");
 fig1 = figure;
 show_image(malards_park_3,"" ,fig1); 
 draw_ori(rxy_mp, aois_mp);
-exportgraphics(fig1, fullfile("images/q2.4_mp.png"), BackgroundColor="none", Resolution=600);
+% exportgraphics(fig1, fullfile("images/q2.4_mp.png"), BackgroundColor="none", Resolution=600);
 
 
 %% 
