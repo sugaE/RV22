@@ -32,21 +32,22 @@ names = ["dice1", "dice2", "dice3", "dice4"];
 counts = zeros(size(names));
 debugging = 0;
 
+%     laplacian of gaussian. Apply before Hough to get clean edges
+lap_g = [
+    0 1 1 2 2 2 1 1 0;
+    1 2 4 5 5 5 4 2 1;
+    1 4 5 3 0 3 5 4 1;
+    2 5 3 -12 -24 -12 3 5 2;
+    2 5 0 -24 -40 -24 0 5 2;
+    2 5 3 -12 -24 -12 3 5 2;
+    1 4 5 3 0 3 4 4 1;
+    1 2 4 5 5 5 4 2 1;
+    0 1 1 2 2 2 1 1 0]; 
+
 for i=1:size(imgs, 2)
     figure
     im_c = imgs{i}; 
     rawimg = rgb2gray(im_c);  
-%     laplacian of gaussian. Apply before Hough to get clean edges
-    lap_g = [
-        0 1 1 2 2 2 1 1 0;
-        1 2 4 5 5 5 4 2 1;
-        1 4 5 3 0 3 5 4 1;
-        2 5 3 -12 -24 -12 3 5 2;
-        2 5 0 -24 -40 -24 0 5 2;
-        2 5 3 -12 -24 -12 3 5 2;
-        1 4 5 3 0 3 4 4 1;
-        1 2 4 5 5 5 4 2 1;
-        0 1 1 2 2 2 1 1 0]; 
      
     gfimg = imfilter(rawimg, lap_g); 
     if debugging
