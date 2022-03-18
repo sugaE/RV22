@@ -2,6 +2,7 @@
 % yxw257@student.bham.ac.uk
 %
 clear all;close all;clc; 
+setup;
 %% *Part 3*
 
 checkerboardP = imread("checkerboardPhoto.png");  
