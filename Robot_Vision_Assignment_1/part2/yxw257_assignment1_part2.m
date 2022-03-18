@@ -1,5 +1,7 @@
-clear all;
-close all;
+%
+% yxw257@student.bham.ac.uk
+%
+clear all;close all;clc; 
 %% *Part 2*
 
 
@@ -12,8 +14,6 @@ chicago_downtown = rgb2gray(chicago_downtown_3);
 malards_park_3 = imread("Malards_in_Golden_Gate_Park.jpg");
 malards_park = rgb2gray(malards_park_3);
 
-% ks = ["blue_marble", "chicago_downtown", "malards_park"];
-% vs = {blue_marble, chicago_downtown, malards_park};
 %% 
 % *Question 2.1*	
 % 
@@ -27,6 +27,7 @@ malards_park = rgb2gray(malards_park_3);
 % of Gaussian filter to the accompanying three images (see above) using your function 
 % and show your results. 
 
+% part2/dog.m
 g3 = dog([3,3], 0, 1.6, 0, 5);
 
 g3_re = conv2(blue_marble, g3);
@@ -50,6 +51,7 @@ show_image(g15_mp, "q2.1_g15_malards_park");
 % Apply your function to the accompanying three images (see above) and show the 
 % different scales produced by your function. 
 
+% part2/dogwithscale.m
 size_of_g = 3:2:19;
 dog_bm=dogwithscale(blue_marble, size_of_g, 0, 0.8, "q2.2_bm");
 dog_cd=dogwithscale(chicago_downtown, size_of_g, 0, 0.8, "q2.2_cd");
@@ -65,21 +67,31 @@ dog_mp=dogwithscale(malards_park, size_of_g, 0, 0.8, "q2.2_mp");
 % images (see above) and show your results by overlaying the feature positions 
 % and sizes on the original images. 
 
-[aois_bm, aoin_bm] = scale_feature(dog_bm, 10, [9, 200]);
+% part2/scale_feature.m
+%
+% chicago_downtown
+[aois_bm, aoin_bm] = scale_feature(dog_bm, 150,"q2.3_bm_grad");
 aoin_bm
-show_image(blue_marble_3, "q2.3_bm");
+fig1 = figure;
+show_image(blue_marble_3, "",fig1); 
 draw_aoi(aois_bm);
+exportgraphics(fig1, fullfile("images/q2.3_bm.png"), BackgroundColor="none", Resolution=600);
 
-
-[aois_cd, aoin_cd] = scale_feature(dog_cd, 19, [11, 200]);
+% chicago_downtown
+[aois_cd, aoin_cd] = scale_feature(dog_cd, 450,"q2.3_cd_grad");
 aoin_cd
-show_image(chicago_downtown_3, "q2.3_cd");
+fig2 = figure;
+show_image(chicago_downtown_3, "",fig2); 
 draw_aoi(aois_cd);
+exportgraphics(fig2, fullfile("images/q2.3_cd.png"), BackgroundColor="none", Resolution=600);
 
-[aois_mp, aoin_mp] = scale_feature(dog_mp, 15, [15, 200]);
+% malards_park
+[aois_mp, aoin_mp] = scale_feature(dog_mp, 350,"q2.3_mp_grad");
 aoin_mp
-show_image(malards_park_3, "q2.3_mp");
+fig3 = figure;
+show_image(malards_park_3, "",fig3); 
 draw_aoi(aois_mp);
+exportgraphics(fig3, fullfile("images/q2.3_mp.png"), BackgroundColor="none", Resolution=600);
 %% 
 % *Question 2.4*
 % 
@@ -89,7 +101,28 @@ draw_aoi(aois_mp);
 % three images (see above) and show your results by overlaying the feature positions, 
 % sizes, and orientations on the original images. 
 
+% part2/rotate_feature.m
 %
+[rxy_bm,aois_bm] = rotate_feature(dog_bm, 150,"q2.4_bm_grad");
+fig1 = figure;
+show_image(blue_marble_3,"" ,fig1); 
+draw_ori(rxy_bm, aois_bm);
+exportgraphics(fig1, fullfile("images/q2.4_bm.png"), BackgroundColor="none", Resolution=600);
+
+%
+[rxy_cd,aois_cd] = rotate_feature(dog_cd, 450,"q2.4_cd_grad");
+fig1 = figure;
+show_image(chicago_downtown_3,"" ,fig1); 
+draw_ori(rxy_cd, aois_cd);
+exportgraphics(fig1, fullfile("images/q2.4_cd.png"), BackgroundColor="none", Resolution=600);
+
+%
+[rxy_mp,aois_mp] = rotate_feature(dog_mp, 350,"q2.4_mp_grad");
+fig1 = figure;
+show_image(malards_park_3,"" ,fig1); 
+draw_ori(rxy_mp, aois_mp);
+exportgraphics(fig1, fullfile("images/q2.4_mp.png"), BackgroundColor="none", Resolution=600);
+
 
 %% 
 %

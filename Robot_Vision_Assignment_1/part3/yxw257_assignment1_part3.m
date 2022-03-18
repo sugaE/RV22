@@ -1,5 +1,7 @@
-clear all;
-close all;
+%
+% yxw257@student.bham.ac.uk
+%
+clear all;close all;clc; 
 %% *Part 3*
 
 checkerboardP = imread("checkerboardPhoto.png");  
@@ -8,7 +10,6 @@ checkerboardP = show_image(checkerboardP, "q3.0_checker");
 circleP = imread("circlePhoto.png");  
 circleP = show_image(circleP, "q3.0_circle");
 
-names = ["Gaussian", "Box", "Median"];
 %% 
 % *Question 3.1*	
 % 
@@ -29,7 +30,7 @@ g15 = gaussian_mn([15, 15], 5); % defined in folder `part2/`, need to add `part2
 checker_g15 = convolve(checkerboardP, g15);
 circle_g15 = convolve(circleP, g15);
 show_image(checker_g15 ,'q3.1_checker_g15');
-show_image(circle_g15 ,'q3.1_circle_g15');
+show_image(circle_g15 ,'q3.1_circle_g15'); 
 %% 
 % *Question 3.2*		
 % 
@@ -40,7 +41,7 @@ b_15 = box_blur(15); % 15×15 box filter; box_blur defined in part3/
 checker_b15 = convolve(checkerboardP, b_15); % convolve defined in part3/
 circle_b15 = convolve(circleP, b_15); % convolve defined in part3/
 show_image(checker_b15 ,'q3.2_checker_b15');
-show_image(circle_b15 ,'q3.2_circle_b15');
+show_image(circle_b15 ,'q3.2_circle_b15'); 
 %% 
 % *Question 3.3*	
 % 
@@ -88,6 +89,8 @@ malards_p = rgb2gray(malards_park_3);
 malards_sp = imnoise(malards_p, 'salt & pepper', 0.075);  
 malards_g = imnoise(malards_p, 'gaussian', 0.1, 0.15);   
 %%
+
+% names = ["Gaussian", "Box", "Median"]; 
 
 for n=[3, 7, 11]
     g_n = gaussian_mn([n,n], n/2);

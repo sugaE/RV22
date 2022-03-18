@@ -1,11 +1,28 @@
-function [accumAOI, aoiN, pyramidi, grdmag, Px, Py] = scale_feature(pyramid, grad_thrd, win_size, minmax)
-
+%
+% yxw257@student.bham.ac.uk
+%
+function [accumAOI, aoiN, pyramidi, grdmag, Px, Py, figs] = scale_feature(pyramid, grad_thrd, file_name, win_size, minmax) 
+% Output:  
+% accumAOI   (:, 4)  detected scale invariant features
+% aoiN       number  number of accumAOI
+% pyramidi   number  index of `pyramid` used for feature detection
+% grad_thrd (:, :)  gradient map
+% Px        (:, :)  gradient map of axis X
+% Py        (:, :)  gradient map of axis Y
+% figs              debug purpose, generating image file 
+% Example input: scale_feature(I, 150)
+ 
 arguments
-    pyramid (:,:,:)
-    grad_thrd  = 1
-    win_size = 1
-    minmax (1,2) = [9 , 1000]
+    pyramid (:,:,:) % gray scale image arrays; output of function dogwithscale.m
+    grad_thrd  = 1  % difference threshold for searching the DoG paramids. 
+                    % When 2 adjacent DoG has difference less than `grad_thrd`, 
+                    % use this layer of pyramid to do feature search.
+    file_name string = ""       % debug purpose, generating image file 
+    win_size = 1    % window size for gradient computation 
+    minmax (1,2) = [9 , 1000]   % min and max size of features during detection
 end
+ 
+
 
 % search 
 pyramidi = 0;
@@ -24,6 +41,7 @@ end
 
 im2 = pyramid(:,:,pyramidi);
 
+% gradient map
 [Px, Py] = gradient(im2, win_size);
 % grdmag = sqrt(Px.^2 + Py.^2-grdx.*Py); 
 
@@ -34,27 +52,18 @@ grdmag = Px.^2 + Py.^2;
 g_7 = gaussian_mn([7,7]);
 grdmag = conv2(grdmag, g_7, "same");
  
-figure; 
+figs = figure; 
 grdmagmask = ( grdmag > grad_thrd);
-show_image(grdmagmask);
-colormap("default"); 
-% 
-% data2 = grdmagmask';
-% [pks1, locs1, w1, p1] = findpeaks(double(grdmagmask(:)); % peaks along x
-% [pks2, locs2, w2, p2] = findpeaks(double(data2(:)); % peaks along y
-% 
-% data_size = size(data); % Gets matrix dimensions
-% [col2, row2] = ind2sub(data_size, locs2); % Converts back to 2D indices
-% locs2 = sub2ind(data_size, row2, col2); % Swaps rows and columns and translates back to 1D indices
-%  
+show_image(grdmagmask, "", figs);
+colormap("default");  
  
 
+% area of interest
 prm_aoiminsize = minmax(1);
 prm_aoimax = minmax(2);
 
 [accumlabel, accum_nRgn] = bwlabel( grdmagmask, 8 ); %Label connected components 8-connected
-accumAOI = ones(0,4);
-% accumAOIsss = accumAOI;
+accumAOI = ones(0,4); 
 for k = 1 : accum_nRgn,
     accumrgn_lin = find( accumlabel ==k );
     [accumrgn_IdxI, accumrgn_IdxJ] = ...
@@ -70,14 +79,16 @@ for k = 1 : accum_nRgn,
             (rgn_bottom - rgn_top + 1) <= prm_aoimax )
        
         aoi = [rgn_top, rgn_bottom, rgn_left, rgn_right ];    % just for referencing convenience
-        accumAOI = [ accumAOI;  aoi ];
-%         hold on;
-%         rectangle('Position',[aoi(3), aoi(1), aoi(4)- aoi(3) , aoi(2)- aoi(1) ], EdgeColor="green", LineWidth=1);
-%         hold off
+        accumAOI = [ accumAOI;  aoi ]; 
     end
 end
 
-draw_aoi(accumAOI);
+draw_aoi(accumAOI); 
+
+if strlength(file_name)
+    exportgraphics(figs, fullfile("images/"+file_name+".png"), BackgroundColor="none", Resolution=600);
+end
+
 
 aoiN = size(accumAOI, 1);
 

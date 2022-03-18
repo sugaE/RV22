@@ -1,3 +1,6 @@
+%
+% yxw257@student.bham.ac.uk
+%
 clear all;close all;clc; 
 %% *Part 4*
 

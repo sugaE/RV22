@@ -1,3 +1,8 @@
+%
+% yxw257@student.bham.ac.uk
+%
+% !!!!!!!!!!!!!!! Please run setup before run other codes
+
 function setup
     disp('Adding subfolders to search path.')
      
