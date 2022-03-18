@@ -35,7 +35,7 @@ end
 if strlength(file_name) 
     fig = figure;
     montage(re,"BorderSize", 2, "BackgroundColor",'b', 'Size',[3,NaN]); % , "DisplayRange", [0, 255]"Size", [NaN, 3], 
-    exportgraphics(fig, fullfile("images/"+file_name+".png"), BackgroundColor="none", Resolution=600);
+%     exportgraphics(fig, fullfile("images/"+file_name+".png"), BackgroundColor="none", Resolution=600);
 end
 
 end

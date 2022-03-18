@@ -18,7 +18,7 @@ axis off;  % for export
 
 % export image as png file
 if strlength(file_name)
-    exportgraphics(fig, fullfile("images/"+file_name+".png"), BackgroundColor="none", Resolution=600);
+%     exportgraphics(fig, fullfile("images/"+file_name+".png"), BackgroundColor="none", Resolution=600);
 end
 
 end

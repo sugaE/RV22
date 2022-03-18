@@ -37,7 +37,7 @@ end
 
 draw_ori(pxy);
 if strlength(file_name)
-    exportgraphics(figs, fullfile("images/"+file_name+".png"), BackgroundColor="none", Resolution=600);
+%     exportgraphics(figs, fullfile("images/"+file_name+".png"), BackgroundColor="none", Resolution=600);
 end
 
 end
