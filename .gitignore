@@ -13,3 +13,8 @@
 *.mlx
 IMG_7048.jpg
 *.asv
+
+# datasets
+*.zip
+**imagenet/
+!*imagenet/.gitkeep
