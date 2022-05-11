@@ -1,0 +1,4 @@
+Part 2/models/*
+!Part 2/models/.gitkeep
+Part 2/imagenet/*
+!Part 2/imagenet/.gitkeep
