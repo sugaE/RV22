@@ -1,3 +1,6 @@
+*.gz
+Part 2/data/*
+!Part 2/data/handwritings
 Part 2/models/*
 !Part 2/models/.gitkeep
 Part 2/imagenet/*
