@@ -23,36 +23,42 @@ fig = figure;
 points = detectMinEigenFeatures(I);
 subplot(2,3,1);
 imshow(I); hold on;
+title("Minimum Eigenvalue");
 plot(points.selectStrongest(num));
 hold off;
 
 points = detectSURFFeatures(I);
 subplot(2,3,2);
 imshow(I); hold on;
+title("SURF");
 plot(points.selectStrongest(num));
 hold off;
 
 points = detectKAZEFeatures(I);
 subplot(2,3,3);
 imshow(I); hold on;
+title("KAZE");
 plot(points.selectStrongest(num));
 hold off;
 
 points = detectFASTFeatures(I);
 subplot(2,3,4);
 imshow(I); hold on;
+title("FAST");
 plot(points.selectStrongest(num));
 hold off;
 
 points = detectORBFeatures(I);
 subplot(2,3,5);
 imshow(I); hold on;
+title("ORB");
 plot(points.selectStrongest(num));
 hold off;
 
 points = detectHarrisFeatures(I);
 subplot(2,3,6);
 imshow(I); hold on;
+title("Harris-Stephens");
 plot(points.selectStrongest(num));
 hold off;
 

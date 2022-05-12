@@ -34,6 +34,6 @@ for i=pairs
     title("A<-"+i);
 
     % export image as png file
-    exportgraphics(fig, "yxw257_assignment2_part1_A"+i+".png ", ...
+    exportgraphics(fig, "yxw257_assignment2_part1_A"+i+".png", ...
         BackgroundColor="none", Resolution=600);
 end
