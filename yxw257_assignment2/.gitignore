@@ -1,8 +1,10 @@
 *.gz
 Part 2/data/*
-!Part 2/data/handwritings
+!Part 2/data/.gitkeep
 !Part 2/data/*.png
-Part 2/models/*
-!Part 2/models/.gitkeep
-Part 2/imagenet/*
-!Part 2/imagenet/.gitkeep
+
+!Part 2/data/handwritings/*
+ 
+!Part 2/data/models/.gitkeep
+ 
+!Part 2/data/imagenet/.gitkeep
