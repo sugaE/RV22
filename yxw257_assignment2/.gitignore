@@ -2,7 +2,7 @@
 Part 2/data/*
 !Part 2/data/.gitkeep
 !Part 2/data/*.png
-#!Part 2/data/*.mat
+!Part 2/data/*.mat
 
 !Part 2/data/imagenet.zip
 !Part 2/data/handwritings/*
