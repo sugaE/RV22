@@ -1,6 +1,6 @@
 function Y = processLabelsMNIST(filename)
 
-dataFolder = fullfile(tempdir,'mnist');
+dataFolder = fullfile("data/",'mnist');
 gunzip(filename,dataFolder)
 
 [~,name,~] = fileparts(filename);

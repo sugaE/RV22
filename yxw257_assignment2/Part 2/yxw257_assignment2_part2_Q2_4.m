@@ -7,8 +7,6 @@ load("utils/constants.mat");
 %% 
 % *Question 2.4.1*
 
-oldpath = addpath(data_dir);
-
 filenameImagesTrain = "train-images-idx3-ubyte.gz";
 filenameLabelsTrain = "train-labels-idx1-ubyte.gz";
 filenameImagesTest = "t10k-images-idx3-ubyte.gz";
@@ -18,13 +16,13 @@ filenameLabelsTest = "t10k-labels-idx1-ubyte.gz";
 
 % % Downloading data
 % for i = [filenameImagesTrain, filenameLabelsTrain, filenameImagesTest, filenameLabelsTest]
-% urlwrite("http://yann.lecun.com/exdb/mnist/" + i, fullfile(data_dir, i));
+% urlwrite("http://yann.lecun.com/exdb/mnist/" + i, fullfile(data_dir, "mnistgz", i));
 % end
 
-XTrain = processImagesMNIST(filenameImagesTrain);
-YTrain = processLabelsMNIST(filenameLabelsTrain);
-XTest = processImagesMNIST(filenameImagesTest);
-YTest = processLabelsMNIST(filenameLabelsTest);
+XTrain = processImagesMNIST(fullfile(data_dir, "mnistgz", filenameImagesTrain));
+YTrain = processLabelsMNIST(fullfile(data_dir, "mnistgz", filenameLabelsTrain));
+XTest = processImagesMNIST(fullfile(data_dir, "mnistgz", filenameImagesTest));
+YTest = processLabelsMNIST(fullfile(data_dir, "mnistgz", filenameLabelsTest));
 %%
 % define
 totaln = 30;

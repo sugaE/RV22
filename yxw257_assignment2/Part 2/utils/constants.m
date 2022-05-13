@@ -1,0 +1,13 @@
+clear all; close all; clc; 
+
+data_dir = fullfile("data/");
+train_dir = fullfile(data_dir, "imagenet/train/");
+val_dir = fullfile(data_dir, "imagenet/val/");
+models_dir = fullfile(data_dir, "models");
+
+
+save(fullfile("utils/constants.mat"), ...
+    "data_dir", ...
+    "val_dir", ...
+    "train_dir", ...
+    "models_dir")

@@ -11,7 +11,7 @@ function X = processImagesMNIST(filename)
 % all by 255, and converts the 3-D array to a 4-D dlarray object. Close the
 % file.
 
-dataFolder = fullfile(tempdir,'mnist');
+dataFolder = fullfile("data/",'mnist');
 gunzip(filename,dataFolder)
 
 [~,name,~] = fileparts(filename);

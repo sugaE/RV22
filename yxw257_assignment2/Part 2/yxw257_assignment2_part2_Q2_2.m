@@ -29,7 +29,7 @@ net.layers{21} = struct('type', 'conv',...
 
 net.layers{22} = struct('type', 'softmaxloss');
 
-
+ 
 opts.backPropDepth = 6; % net.layders{16}
 net.meta.trainOpts.numEpochs = 10;
 %%
